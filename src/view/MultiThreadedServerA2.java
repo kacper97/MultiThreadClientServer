@@ -16,8 +16,12 @@ public class MultiThreadedServerA2 extends JFrame {
 
 	  public MultiThreadedServerA2() {
 	    // Place text area on the frame
-	    setLayout(new BorderLayout());
-	    add(new JScrollPane(jta), BorderLayout.CENTER);
+	    getContentPane().setLayout(new BorderLayout());
+	    JScrollPane scrollPane = new JScrollPane(jta);
+	    getContentPane().add(scrollPane, BorderLayout.CENTER);
+	    
+	    JLabel lblInformationAboutServer = new JLabel("Information about server");
+	    scrollPane.setColumnHeaderView(lblInformationAboutServer);
 
 	    setTitle("Server");
 	    setSize(500, 300);

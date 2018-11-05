@@ -17,6 +17,7 @@ public class ClientA2 extends JFrame {
 	  // IO streams
 	  private DataOutputStream toServer;
 	  private DataInputStream fromServer;
+	  private final JButton btnEnter = new JButton("ENTER");
 
 	  public static void main(String[] args) {
 	    new ClientA2();
@@ -26,13 +27,20 @@ public class ClientA2 extends JFrame {
 	    // Panel p to hold the label and text field
 	    JPanel p = new JPanel();
 	    p.setLayout(new BorderLayout());
-	    p.add(new JLabel("Enter radius"), BorderLayout.WEST);
-	    p.add(jtf, BorderLayout.CENTER);
-	    jtf.setHorizontalAlignment(JTextField.RIGHT);
+	    p.add(new JLabel("Enter Student Number Below Please"), BorderLayout.WEST);
 
-	    setLayout(new BorderLayout());
-	    add(p, BorderLayout.NORTH);
-	    add(new JScrollPane(jta), BorderLayout.CENTER);
+	    getContentPane().setLayout(new BorderLayout());
+	    getContentPane().add(p, BorderLayout.NORTH);
+	    btnEnter.addActionListener(new ActionListener() {
+	    	public void actionPerformed(ActionEvent arg0) {
+	    	}
+	    });
+	    
+	    p.add(btnEnter, BorderLayout.EAST);
+	    JScrollPane scrollPane = new JScrollPane(jta);
+	    getContentPane().add(scrollPane, BorderLayout.CENTER);
+	    scrollPane.setColumnHeaderView(jtf);
+	    jtf.setHorizontalAlignment(JTextField.RIGHT);
 
 	    jtf.addActionListener(new Listener()); // Register listener
 
