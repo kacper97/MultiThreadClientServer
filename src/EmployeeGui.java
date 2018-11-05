@@ -1,10 +1,7 @@
-package view;
 //imports
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-
-import utils.Connector;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
