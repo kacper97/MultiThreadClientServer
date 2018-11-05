@@ -3,6 +3,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+import utils.Connector;
+
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.sql.ResultSet;
@@ -76,7 +78,7 @@ public class EmployeeGui {
 		
 		//Gender label creation + addition
 		JLabel lblGender = new JLabel("Gender");
-		lblGender.setFont(new Font("SansSerif", Font.BOLD, 13));
+		lblGender.setFont(new Font( 	"SansSerif", Font.BOLD, 13));
 		lblGender.setBounds(49, 292, 56, 16);
 		frame.getContentPane().add(lblGender);
 		
