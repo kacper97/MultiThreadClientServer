@@ -2,6 +2,8 @@ package controller;
 import java.sql.SQLException;
 
 import utils.Connector;
+import view.ClientA2;
+import view.MultiThreadedServerA2;
 public class Driver {
 
 	/**
@@ -16,10 +18,13 @@ public class Driver {
 	        } catch (SQLException e) {
 	            e.printStackTrace();
 	        }
+	        
+	        
 	        //run gets the result set
 	        jdbc.run();
-	        //MultiThreadedServerA2 driver = new MultiThreadedServerA2();
-		    //driver.frame.setVisible(true);
+		    ClientA2 driver = new ClientA2();
+	        MultiThreadedServerA2 server = new MultiThreadedServerA2();
+
 		}
 	}
 

@@ -1,12 +1,20 @@
 package view;
 import java.io.*;
 import java.net.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+
+import utils.Connector;
 
 import javax.swing.*;
 
 public class MultiThreadedServerA2 extends JFrame {
+	
+	private Connector conn = new Connector();
+	private ResultSet rs;
 
 	  // Text area for displaying contents
 	  private JTextArea jta = new JTextArea();
@@ -47,9 +55,30 @@ public class MultiThreadedServerA2 extends JFrame {
 	        // Receive radius from the client
 	        int studentNu = inputFromClient.readInt();
 
-	        // Compute area
-	        double area = studentNu * studentNu* Math.PI;
-
+	        try {
+				int studentId=  rs.getInt("SID");
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			try {
+				int studentNuRet = rs.getInt("STUD_ID");
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			try {
+				String firstName = rs.getString("FNAME");
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			try {
+				String secondName = rs.getString("SNAME");
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 	        // Send area back to the client
 	        // outputToClient.writeDouble(area);
 	        jta.append("Processing ...." + '\n');

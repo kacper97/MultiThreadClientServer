@@ -59,11 +59,11 @@ public class Connector  {
 	public ResultSet run() throws SQLException {
 		// Connect to MySQL
 		Statement stmt = getConnection().createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-        stmt.executeQuery("SELECT * FROM jdbc_test");
-      //  System.out.println("Created a result set");
+        stmt.executeQuery("SELECT * FROM mystudents");
+        System.out.println("Created a result set");
         ResultSet rs = stmt.getResultSet();
         return rs;
-    }
+        }
 
 }
 	 
