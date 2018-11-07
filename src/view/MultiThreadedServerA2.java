@@ -3,6 +3,7 @@ import java.io.*;
 import java.net.*;
 import java.util.*;
 import java.awt.*;
+
 import javax.swing.*;
 
 public class MultiThreadedServerA2 extends JFrame {
@@ -44,16 +45,16 @@ public class MultiThreadedServerA2 extends JFrame {
 
 	      while (true) {
 	        // Receive radius from the client
-	        double radius = inputFromClient.readDouble();
+	        int studentNu = inputFromClient.readInt();
 
 	        // Compute area
-	        double area = radius * radius * Math.PI;
+	        double area = studentNu * studentNu* Math.PI;
 
 	        // Send area back to the client
-	        outputToClient.writeDouble(area);
-
-	        jta.append("Radius received from client: " + radius + '\n');
-	        jta.append("Area found: " + area + '\n');
+	        // outputToClient.writeDouble(area);
+	        jta.append("Processing ...." + '\n');
+	        jta.append("Student Number received from client: " + studentNu + '\n');
+	      //  jta.append("Area found: " + area + '\n');
 	      }
 	    }
 	    catch(IOException ex) {

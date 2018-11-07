@@ -71,19 +71,21 @@ public class ClientA2 extends JFrame {
 	    public void actionPerformed(ActionEvent e) {
 	      try {
 	        // Get the radius from the text field
-	        double radius = Double.parseDouble(jtf.getText().trim());
+	        int studentNu = Integer.parseInt(jtf.getText().trim());
 
 	        // Send the radius to the server
-	        toServer.writeDouble(radius);
+	        toServer.writeInt(studentNu);
 	        toServer.flush();
 
 	        // Get area from the server
 	        double area = fromServer.readDouble();
 
 	        // Display to the text area
-	        jta.append("Radius is " + radius + "\n");
-	        jta.append("Area received from the server is "
-	          + area + '\n');
+	        jta.append("Student Number entered is " + studentNu + "\n");
+	        jta.append("Welcome "+ area +".. You are now connected to the Server"+ '\n');
+	        if (studentNu != area) {
+	    		  jta.append(" Sorry "+ studentNu + ". You are not a registered student. Bye.");
+	      }
 	      }
 	      catch (IOException ex) {
 	        System.err.println(ex);
