@@ -78,12 +78,12 @@ public class ClientA2 extends JFrame {
 	        toServer.flush();
 
 	        // Get area from the server
-	        double area = fromServer.readDouble();
+	        int studentID = fromServer.readInt();
 
 	        // Display to the text area
 	        jta.append("Student Number entered is " + studentNu + "\n");
-	        jta.append("Welcome "+ area +".. You are now connected to the Server"+ '\n');
-	        if (studentNu != area) {
+	        jta.append("Welcome "+ studentID +".. You are now connected to the Server"+ '\n');
+	        if (studentNu != studentID) {
 	    		  jta.append(" Sorry "+ studentNu + ". You are not a registered student. Bye.");
 	      }
 	      }

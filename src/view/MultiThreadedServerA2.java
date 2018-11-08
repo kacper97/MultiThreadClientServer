@@ -19,11 +19,11 @@ public class MultiThreadedServerA2 extends JFrame {
 	  // Text area for displaying contents
 	  private JTextArea jta = new JTextArea();
 
-	  public static void main(String[] args) {
+	  public static void main(String[] args) throws SQLException {
 	    new MultiThreadedServerA2();
 	  }
 
-	  public MultiThreadedServerA2() {
+	  public MultiThreadedServerA2() throws SQLException {
 	    // Place text area on the frame
 	    getContentPane().setLayout(new BorderLayout());
 	    JScrollPane scrollPane = new JScrollPane(jta);
@@ -55,35 +55,15 @@ public class MultiThreadedServerA2 extends JFrame {
 	        // Receive radius from the client
 	        int studentNu = inputFromClient.readInt();
 
-	        try {
-				int studentId=  rs.getInt("SID");
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			try {
-				int studentNuRet = rs.getInt("STUD_ID");
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			try {
-				String firstName = rs.getString("FNAME");
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			try {
-				String secondName = rs.getString("SNAME");
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+	        int studentId=  rs.getInt("SID");
+			int studentNuRet = rs.getInt("STUD_ID");
+			String firstName = rs.getString("FNAME");
+			String secondName = rs.getString("SNAME");
 	        // Send area back to the client
 	        // outputToClient.writeDouble(area);
 	        jta.append("Processing ...." + '\n');
 	        jta.append("Student Number received from client: " + studentNu + '\n');
-	      //  jta.append("Area found: " + area + '\n');
+	        jta.append("Info found: " + studentId + studentNuRet + firstName + secondName + '\n');
 	      }
 	    }
 	    catch(IOException ex) {
