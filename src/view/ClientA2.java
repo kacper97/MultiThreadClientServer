@@ -70,7 +70,7 @@ public class ClientA2 extends JFrame {
 	      try {
 	        // Get the radius from the text field
 	        int studentNu = Integer.parseInt(jtf.getText());
-
+	        	// first number =20018384 
 	        // Send the radius to the server
 	        toServer.writeInt(studentNu);
 	        //server does get

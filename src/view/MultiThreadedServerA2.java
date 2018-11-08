@@ -40,6 +40,9 @@ public class MultiThreadedServerA2 extends JFrame {
 	    setSize(500, 300);
 	    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    setVisible(true); // It is necessary to show the frame here!
+	    
+    	getSQL();
+
 
 	    try {
 	      // Create a server socket
@@ -59,34 +62,39 @@ public class MultiThreadedServerA2 extends JFrame {
 	        // Receive radius from the client
 	        int studentNu = inputFromClient.readInt();
 	        
-	        int studentNuRet = rs.getInt("STUD_ID");
-			outputToClient.writeInt(studentNuRet);
-	       // if (studentNu == studentNuRet) {
-	       
-	       
-/*
-	        if (studentNu == studentNuRet) {
+	       // int studentNuRet = rs.getInt("STUD_ID");
+	        int studentID=  rs.getInt("SID");
+			outputToClient.writeInt(studentID);
 				int studentNuRet = rs.getInt("STUD_ID");
-				int studentI=  rs.getInt("SID");
 				String firstName = rs.getString("FNAME");
 				String secondName = rs.getString("SNAME");
-			}
-			*/
-
-	        // for studdent number get the corresponding details : 
-	       
-
 	        	jta.append("Processing ...." + '\n');
-	  	        jta.append("Student Number received from client: " + studentNu+ '\n');    
-		        jta.append("Info found: " + studentNuRet+ '\n');
-	        }
-	      
+	  	        jta.append("Student Number received from client: " + studentNu + studentID + '\n');    
+		        jta.append("Info found: " + studentID+ ""+ studentNuRet+ ""+ firstName+""+ secondName + '\n');
+	      }
 	    }
 	    catch(IOException ex) {
 	      System.err.println(ex);
 	    }
+	    
 	  }
+	  
+		private void getSQL() throws SQLException{
+			rs = jdbc.run();
+			if(rs.next()) {
+					setText(	rs.getInt("SID"),
+						rs.getInt("STUD_ID"),
+						rs.getString("FNAME"),
+						rs.getString("SNAME"));
+			}
+		}
+
+		private void setText(int SID, int STUD_ID, String FNAME, String SNAME) {
+
+		}
 	}
+
+
 
 	
 /* 
