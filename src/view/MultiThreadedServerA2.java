@@ -12,9 +12,8 @@ import utils.Connector;
 import javax.swing.*;
 
 public class MultiThreadedServerA2 extends JFrame {
-	
-	private Connector conn = new Connector();
-	private ResultSet rs;
+	Connector jdbc = new Connector();	
+     private ResultSet rs;
 
 	  // Text area for displaying contents
 	  private JTextArea jta = new JTextArea();
@@ -24,6 +23,11 @@ public class MultiThreadedServerA2 extends JFrame {
 	  }
 
 	  public MultiThreadedServerA2() throws SQLException {
+	         jdbc.getConnection();
+	         System.out.println("Connected to database");
+	     
+	     
+	     jdbc.run();
 	    // Place text area on the frame
 	    getContentPane().setLayout(new BorderLayout());
 	    JScrollPane scrollPane = new JScrollPane(jta);
@@ -54,17 +58,29 @@ public class MultiThreadedServerA2 extends JFrame {
 	      while (true) {
 	        // Receive radius from the client
 	        int studentNu = inputFromClient.readInt();
+	        System.out.println("numb rec");
+	        int studentNuRet = rs.getInt("STUD_ID");
+			outputToClient.writeInt(studentNuRet);
+	       // if (studentNu == studentNuRet) {
+	       
+	       
+/*
+	        if (studentNu == studentNuRet) {
+				int studentNuRet = rs.getInt("STUD_ID");
+				int studentI=  rs.getInt("SID");
+				String firstName = rs.getString("FNAME");
+				String secondName = rs.getString("SNAME");
+			}
+			*/
 
-	        int studentId=  rs.getInt("SID");
-			int studentNuRet = rs.getInt("STUD_ID");
-			String firstName = rs.getString("FNAME");
-			String secondName = rs.getString("SNAME");
-	        // Send area back to the client
-	        // outputToClient.writeDouble(area);
-	        jta.append("Processing ...." + '\n');
-	        jta.append("Student Number received from client: " + studentNu + '\n');
-	        jta.append("Info found: " + studentId + studentNuRet + firstName + secondName + '\n');
-	      }
+	        // for studdent number get the corresponding details : 
+	       
+
+	        	jta.append("Processing ...." + '\n');
+	  	        jta.append("Student Number received from client: " + studentNu+ '\n');    
+		        jta.append("Info found: " + studentNuRet+ '\n');
+	        }
+	      
 	    }
 	    catch(IOException ex) {
 	      System.err.println(ex);

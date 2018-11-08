@@ -21,9 +21,14 @@ public class Driver {
 	        
 	        
 	        //run gets the result set
-	        jdbc.run();
-		    ClientA2 driver = new ClientA2();
 	        MultiThreadedServerA2 server = new MultiThreadedServerA2();
+
+	        jdbc.run();
+	        
+	        ClientA2 driver = new ClientA2();
+	        
+	      
+		
 
 		}
 	}

@@ -31,10 +31,8 @@ public class ClientA2 extends JFrame {
 
 	    getContentPane().setLayout(new BorderLayout());
 	    getContentPane().add(p, BorderLayout.NORTH);
-	    btnEnter.addActionListener(new ActionListener() {
-	    	public void actionPerformed(ActionEvent arg0) {
-	    	}
-	    });
+	    
+	    btnEnter.addActionListener(new Listener());
 	    
 	    p.add(btnEnter, BorderLayout.EAST);
 	    JScrollPane scrollPane = new JScrollPane(jta);
@@ -71,21 +69,31 @@ public class ClientA2 extends JFrame {
 	    public void actionPerformed(ActionEvent e) {
 	      try {
 	        // Get the radius from the text field
-	        int studentNu = Integer.parseInt(jtf.getText().trim());
+	        int studentNu = Integer.parseInt(jtf.getText());
 
 	        // Send the radius to the server
 	        toServer.write(studentNu);
+	        //server does get
+	       
 	        toServer.flush();
-
+	        System.out.println("printed");
 	        // Get area from the server
 	        int studentID = fromServer.readInt();
+	        int studentNuRet = fromServer.readInt();
+	        String firstName = fromServer.readUTF();
+	        String secondName = fromServer.readUTF();
+	        
 
 	        // Display to the text area
 	        jta.append("Student Number entered is " + studentNu + "\n");
 	        jta.append("Welcome "+ studentID +".. You are now connected to the Server"+ '\n');
+	       /*
 	        if (studentNu != studentID) {
-	    		  jta.append(" Sorry "+ studentNu + ". You are not a registered student. Bye.");
+	    	
+	    	jta.append(" Sorry "+ studentNu + ". You are not a registered student. Bye.");
 	      }
+	      */
+	        jta.append(firstName + secondName + studentNuRet + studentID); 
 	      }
 	      catch (IOException ex) {
 	        System.err.println(ex);
@@ -94,10 +102,7 @@ public class ClientA2 extends JFrame {
 	  }
 	}
 
-	/*
-	 * Enters Student Id + submits request
-	 * 
-	 *  Validate Communication by
+	/*  Validate Communication by
 		displaying HostName and IPAddress
 		in the Client/Server windows with all messages sent
 	 */
