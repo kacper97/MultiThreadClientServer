@@ -68,9 +68,12 @@ public class MultiThreadedServerA2 extends JFrame {
 				int studentNuRet = rs.getInt("STUD_ID");
 				String firstName = rs.getString("FNAME");
 				String secondName = rs.getString("SNAME");
+				outputToClient.writeInt(studentNuRet);
+				outputToClient.writeUTF(firstName);
+				outputToClient.writeUTF(secondName);
 	        	jta.append("Processing ...." + '\n');
 	  	        jta.append("Student Number received from client: " + studentNu + studentID + '\n');    
-		        jta.append("Info found: " + studentID+ ""+ studentNuRet+ ""+ firstName+""+ secondName + '\n');
+		        jta.append("Info found: " + studentID + " " + studentNuRet + " " + firstName + " " + secondName + '\n');
 	      }
 	    }
 	    catch(IOException ex) {

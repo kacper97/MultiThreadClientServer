@@ -71,6 +71,8 @@ public class ClientA2 extends JFrame {
 	        // Get the radius from the text field
 	        int studentNu = Integer.parseInt(jtf.getText());
 	        	// first number =20018384 
+	        // other number in db = 20081344
+	        //third  = 20018484
 	        // Send the radius to the server
 	        toServer.writeInt(studentNu);
 	        //server does get
@@ -93,7 +95,7 @@ public class ClientA2 extends JFrame {
 	    	jta.append(" Sorry "+ studentNu + ". You are not a registered student. Bye.");
 	      }
 	      */
-	        jta.append(firstName + secondName + studentNuRet + studentID); 
+	        jta.append(+ studentID + " " + studentNuRet + " " + firstName + " " + secondName + "\n"); 
 	      }
 	      catch (IOException ex) {
 	        System.err.println(ex);
