@@ -58,7 +58,7 @@ public class MultiThreadedServerA2 extends JFrame {
 	      while (true) {
 	        // Receive radius from the client
 	        int studentNu = inputFromClient.readInt();
-	        System.out.println("numb rec");
+	        
 	        int studentNuRet = rs.getInt("STUD_ID");
 			outputToClient.writeInt(studentNuRet);
 	       // if (studentNu == studentNuRet) {

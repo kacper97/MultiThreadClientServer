@@ -72,7 +72,7 @@ public class ClientA2 extends JFrame {
 	        int studentNu = Integer.parseInt(jtf.getText());
 
 	        // Send the radius to the server
-	        toServer.write(studentNu);
+	        toServer.writeInt(studentNu);
 	        //server does get
 	       
 	        toServer.flush();
