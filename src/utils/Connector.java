@@ -65,5 +65,16 @@ public class Connector  {
         return rs;
         }
 
+    /*
+    Returns ResultSet of found record from database
+     */
+    public ResultSet returnRecord(int id) throws SQLException{
+        Statement stmt = getConnection().createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
+                ResultSet.CONCUR_UPDATABLE);
+       String sqlGet = "SELECT * FROM myStudents WHERE STUD_ID ='" + id + "'";
+        stmt.executeQuery(sqlGet);
+        ResultSet rs = stmt.getResultSet();
+        return rs;
+    }
 }
 	 

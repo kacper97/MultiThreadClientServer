@@ -12,7 +12,7 @@ import utils.Connector;
 import javax.swing.*;
 
 public class MultiThreadedServerA2 extends JFrame {
-	Connector jdbc = new Connector();	
+	private Connector jdbc = new Connector();	
      private ResultSet rs;
 
 	  // Text area for displaying contents
@@ -61,19 +61,20 @@ public class MultiThreadedServerA2 extends JFrame {
 	      while (true) {
 	        // Receive radius from the client
 	        int studentNu = inputFromClient.readInt();
-	        
-	       // int studentNuRet = rs.getInt("STUD_ID");
-	        int studentID=  rs.getInt("SID");
-			outputToClient.writeInt(studentID);
-				int studentNuRet = rs.getInt("STUD_ID");
+	        ResultSet rs = jdbc.returnRecord(studentNu);
+	       	
+           if (rs.next()) {
+			   	int studentID=  rs.getInt("SID");	
+				outputToClient.writeInt(studentID);
 				String firstName = rs.getString("FNAME");
 				String secondName = rs.getString("SNAME");
-				outputToClient.writeInt(studentNuRet);
+				outputToClient.writeInt(studentNu);
 				outputToClient.writeUTF(firstName);
 				outputToClient.writeUTF(secondName);
 	        	jta.append("Processing ...." + '\n');
-	  	        jta.append("Student Number received from client: " + studentNu + studentID + '\n');    
-		        jta.append("Info found: " + studentID + " " + studentNuRet + " " + firstName + " " + secondName + '\n');
+	  	        jta.append("Student Number received from client: " + studentNu + '\n');    
+		        jta.append("Info found: " + studentID + " " + studentNu + " " + firstName + " " + secondName + '\n');
+	      }
 	      }
 	    }
 	    catch(IOException ex) {
@@ -85,15 +86,11 @@ public class MultiThreadedServerA2 extends JFrame {
 		private void getSQL() throws SQLException{
 			rs = jdbc.run();
 			if(rs.next()) {
-					setText(	rs.getInt("SID"),
-						rs.getInt("STUD_ID"),
-						rs.getString("FNAME"),
-						rs.getString("SNAME"));
+						rs.getInt("SID");
+						rs.getInt("STUD_ID");
+						rs.getString("FNAME");
+						rs.getString("SNAME");
 			}
-		}
-
-		private void setText(int SID, int STUD_ID, String FNAME, String SNAME) {
-
 		}
 	}
 
