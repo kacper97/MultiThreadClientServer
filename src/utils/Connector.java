@@ -44,7 +44,7 @@ public class Connector  {
 
 		return conn;
 	}
-
+ 
 	/**
 	 * Connect to MySQL and execute update added together and refactored
 	 * 

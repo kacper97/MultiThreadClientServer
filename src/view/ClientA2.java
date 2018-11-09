@@ -19,6 +19,8 @@ public class ClientA2 extends JFrame {
 	  private DataInputStream fromServer;
 	  private final JButton btnEnter = new JButton("ENTER");
 
+	public Boolean TR;
+
 	  public static void main(String[] args) {
 	    new ClientA2();
 	  }
@@ -78,24 +80,24 @@ public class ClientA2 extends JFrame {
 	        //server does get
 	       
 	        toServer.flush();
-	        System.out.println("printed");
+	        
 	        // Get area from the server
 	        int studentID = fromServer.readInt();
 	        int studentNuRet = fromServer.readInt();
 	        String firstName = fromServer.readUTF();
 	        String secondName = fromServer.readUTF();
-	        
-
+	        Boolean error = fromServer.readBoolean();
+    
+	    
 	        // Display to the text area
 	        jta.append("Student Number entered is " + studentNu + "\n");
 	        jta.append("Welcome "+ studentID +".. You are now connected to the Server"+ '\n');
-	       /*
-	        if (studentNu != studentID) {
-	    	
-	    	jta.append(" Sorry "+ studentNu + ". You are not a registered student. Bye.");
-	      }
-	      */
 	        jta.append(+ studentID + " " + studentNuRet + " " + firstName + " " + secondName + "\n"); 
+	        
+	        if(error) {
+	        	jta.append("Sorry you are not a registered student. Bye");
+	        }
+	      
 	      }
 	      catch (IOException ex) {
 	        System.err.println(ex);

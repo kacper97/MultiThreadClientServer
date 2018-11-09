@@ -40,9 +40,6 @@ public class MultiThreadedServerA2 extends JFrame {
 	    setSize(500, 300);
 	    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    setVisible(true); // It is necessary to show the frame here!
-	    
-    	getSQL();
-
 
 	    try {
 	      // Create a server socket
@@ -75,6 +72,13 @@ public class MultiThreadedServerA2 extends JFrame {
 	  	        jta.append("Student Number received from client: " + studentNu + '\n');    
 		        jta.append("Info found: " + studentID + " " + studentNu + " " + firstName + " " + secondName + '\n');
 	      }
+           
+        	   Boolean error = rs.wasNull();
+        	   outputToClient.writeBoolean(error);
+        	   jta.append("Sorry you are not a registered student. Bye");
+               
+               socket.close(); // close socket
+           
 	      }
 	    }
 	    catch(IOException ex) {
@@ -82,28 +86,7 @@ public class MultiThreadedServerA2 extends JFrame {
 	    }
 	    
 	  }
-	  
-		private void getSQL() throws SQLException{
-			rs = jdbc.run();
-			if(rs.next()) {
-						rs.getInt("SID");
-						rs.getInt("STUD_ID");
-						rs.getString("FNAME");
-						rs.getString("SNAME");
-			}
-		}
 	}
 
 
-
-	
-/* 
- * New thread created for client 
- * Validation of request compared to database
- * 
-
- *	Validate Communication by
- *  Displaying HostName and IPAddress
- * 	In the Client/Server windows with all messages sent
- */
 
