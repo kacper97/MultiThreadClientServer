@@ -17,6 +17,7 @@ public class ClientA2 extends JFrame {
 	  private DataOutputStream toServer;
 	  private DataInputStream fromServer;
 	  private final JButton btnEnter = new JButton("ENTER");
+	  private final JButton btnQuit = new JButton("QUIT");
 
 	  public static void main(String[] args) {
 	    new ClientA2();
@@ -39,6 +40,11 @@ public class ClientA2 extends JFrame {
 	    getContentPane().add(scrollPane, BorderLayout.CENTER);
 	    scrollPane.setColumnHeaderView(jtf);
 	    jtf.setHorizontalAlignment(JTextField.RIGHT);
+	    
+	    
+	    btnQuit.addActionListener(e -> System.exit(0));
+	    
+	    scrollPane.setRowHeaderView(btnQuit);
 
 	    // Listener
 	    jtf.addActionListener(new Listener()); 
