@@ -92,9 +92,12 @@ public class ClientA2 extends JFrame {
 	        jta.append(+ studentID + " " + studentNuRet + " " + firstName + " " + secondName + "\n"); 
 	      
 	      }
+	      // if the number is incorrect  
 	      catch (IOException ex) {
-	    	  jta.append("Sorry you are not a registered student, bye " + "\n");
+	    	  String number = jtf.getText();
+	    	  jta.append("Sorry "+ number+" you are not a registered student, bye " + "\n");
 	    	  jtf.setText("Next time please insert a valid number");
+	    	  jtf.setEditable(false);
 	        System.err.println(ex);
 	      }
 	    }

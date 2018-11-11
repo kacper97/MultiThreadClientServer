@@ -56,6 +56,9 @@ public class MultiThreadedServerA2 extends JFrame {
 	        socket.getOutputStream());
 
 	      while (true) {
+	    	  if (socket.isConnected()) {
+	    		  jta.append("Processing ...." + '\n');
+	    	  }
 	        // Receive radius from the client
 	        int studentNu = inputFromClient.readInt();
 	        ResultSet rs = jdbc.returnRecord(studentNu);
@@ -68,7 +71,7 @@ public class MultiThreadedServerA2 extends JFrame {
 				outputToClient.writeInt(studentNu);
 				outputToClient.writeUTF(firstName);
 				outputToClient.writeUTF(secondName);
-	        	jta.append("Processing ...." + '\n');
+	        	
 	  	        jta.append("Student Number received from client: " + studentNu + '\n');    
 		        jta.append("Info found: " + studentID + " " + studentNu + " " + firstName + " " + secondName + '\n');
 	      }
@@ -76,7 +79,6 @@ public class MultiThreadedServerA2 extends JFrame {
         	   Boolean error = rs.isClosed();
         	   outputToClient.writeBoolean(error);
         	   jta.append("Sorry you are not a registered student. Bye");
-               
                socket.close(); // close socket
            }
 	      }
