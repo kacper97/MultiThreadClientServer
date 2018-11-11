@@ -9,6 +9,8 @@ import java.awt.*;
 import utils.Connector;
 
 import javax.swing.*;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class MultiThreadedServerA2 extends JFrame {
 	  // connections to the database
@@ -25,6 +27,11 @@ public class MultiThreadedServerA2 extends JFrame {
 	    
 	    JLabel lblInformationAboutServer = new JLabel("Information about server");
 	    scrollPane.setColumnHeaderView(lblInformationAboutServer);
+	    
+	    JButton btnQuit = new JButton("QUIT");
+	    //Quit button that closes the app
+	    btnQuit.addActionListener(e -> System.exit(0));
+	    getContentPane().add(btnQuit, BorderLayout.SOUTH);
 
 	    setTitle("Server");
 	    setSize(500, 300);

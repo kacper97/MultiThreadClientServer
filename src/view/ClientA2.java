@@ -9,7 +9,7 @@ public class ClientA2 extends JFrame {
 	  // Text field for inputing Student Number
 	  private JTextField jtf = new JTextField();
 
-	  // Text area to display contents from server
+	  // Text area to display contents obtained from server
 	  private JTextArea jta = new JTextArea();
 	  
 
@@ -37,15 +37,13 @@ public class ClientA2 extends JFrame {
 	    
 	    p.add(btnEnter, BorderLayout.EAST);
 	    JScrollPane scrollPane = new JScrollPane(jta);
+	    getContentPane().add(btnQuit, BorderLayout.SOUTH);
 	    getContentPane().add(scrollPane, BorderLayout.CENTER);
 	    scrollPane.setColumnHeaderView(jtf);
 	    jtf.setHorizontalAlignment(JTextField.RIGHT);
 	    
-	    
+	    //Quit button that closes the app
 	    btnQuit.addActionListener(e -> System.exit(0));
-	    
-	    scrollPane.setRowHeaderView(btnQuit);
-
 	    // Listener
 	    jtf.addActionListener(new Listener()); 
 
