@@ -1,35 +1,33 @@
 package controller;
 import java.sql.SQLException;
 
-import utils.Connector;
 import view.ClientA2;
 import view.MultiThreadedServerA2;
-public class Driver {
+import javax.swing.*;
+import java.awt.*;
 
-	/**
-		 * Connect to the DB
-	 * @throws SQLException 
-		 */
-		public static void main(String[] args) throws SQLException {
-			Connector jdbc = new Connector();
-	        try {
-	            jdbc.getConnection();
-	            System.out.println("Connected to database");
-	        } catch (SQLException e) {
-	            e.printStackTrace();
+public class Driver extends JFrame {
+	// Button for client creation
+    private JButton btn_client = new JButton("Click for Client");
+
+    private Driver() {
+ // Create frame
+    setLayout(new BorderLayout());
+    add(btn_client, BorderLayout.CENTER);
+
+    setTitle("Sockets and Threads APP");
+    setSize(500,300);
+    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    setVisible(true);
+
+    // Add action listener for launching client
+    btn_client.addActionListener(e -> new ClientA2());
+}
+
+		public static void main(String[] args) throws SQLException  {
+			 new Driver();
+			 new MultiThreadedServerA2();
 	        }
-	        
-	        
-	        //run gets the result set
-	        MultiThreadedServerA2 server = new MultiThreadedServerA2();
 
-	        jdbc.run();
-	        
-	        ClientA2 driver = new ClientA2();
-	        
-	      
-		
-
-		}
 	}
 

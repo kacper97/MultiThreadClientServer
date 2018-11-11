@@ -11,6 +11,7 @@ public class ClientA2 extends JFrame {
 
 	  // Text area to display contents from server
 	  private JTextArea jta = new JTextArea();
+	  
 
 	  // IO streams
 	  private DataOutputStream toServer;
@@ -58,7 +59,7 @@ public class ClientA2 extends JFrame {
 	      // Create an output stream to send data to the server
 	      toServer = new DataOutputStream(socket.getOutputStream());
 	    }
-	    //If Conneection has an error
+	    //If Connection has an error
 	    catch (IOException ex) {
 	      jta.append(ex.toString() + '\n');
 	    }
@@ -84,6 +85,7 @@ public class ClientA2 extends JFrame {
 	        String secondName = fromServer.readUTF();
 	    
 	        // Display to the text area
+	        jta.setEditable(false);
 	        jta.append("Student Number entered is " + studentNu + "\n");
 	        jta.append("Welcome "+ studentNuRet +".. You are now connected to the Server"+ '\n');
 	        jta.append( firstName + " " + secondName + "  Your student ID Is: " + studentID + "  Your Student Number is: "+ studentNuRet +"\n"); 
