@@ -5,7 +5,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 
 import utils.Connector;
 
@@ -23,11 +22,10 @@ public class MultiThreadedServerA2 extends JFrame {
 	  }
 
 	  public MultiThreadedServerA2() throws SQLException {
+		  // connections to the database
 	         jdbc.getConnection();
 	         System.out.println("Connected to database");
-	     
-	     
-	     jdbc.run();
+	         jdbc.run();
 	    // Place text area on the frame
 	    getContentPane().setLayout(new BorderLayout());
 	    JScrollPane scrollPane = new JScrollPane(jta);
@@ -44,6 +42,7 @@ public class MultiThreadedServerA2 extends JFrame {
 	    try {
 	      // Create a server socket
 	      ServerSocket serverSocket = new ServerSocket(8000);
+	      //information about the server
 	      jta.append("Server started at " + new Date() + '\n');
 
 	      // Listen for a connection request
@@ -54,12 +53,14 @@ public class MultiThreadedServerA2 extends JFrame {
 	        socket.getInputStream());
 	      DataOutputStream outputToClient = new DataOutputStream(
 	        socket.getOutputStream());
-
+	      
+	      // if the socket is still connected do this loop, checking if not closed 
+	      //  As prior, if wrong number entered it would close the socket but still print out processing
 	      while (true) {
-	    	  if (socket.isConnected()) {
+	    	  if (socket.isConnected() && !socket.isClosed()) {
 	    		  jta.append("Processing ...." + '\n');
 	    	  }
-	        // Receive radius from the client
+	        // Receive Student number from the client
 	        int studentNu = inputFromClient.readInt();
 	        ResultSet rs = jdbc.returnRecord(studentNu);
 	       	
@@ -71,15 +72,15 @@ public class MultiThreadedServerA2 extends JFrame {
 				outputToClient.writeInt(studentNu);
 				outputToClient.writeUTF(firstName);
 				outputToClient.writeUTF(secondName);
-	        	
 	  	        jta.append("Student Number received from client: " + studentNu + '\n');    
 		        jta.append("Info found: " + studentID + " " + studentNu + " " + firstName + " " + secondName + '\n');
 	      }
            else {
         	   Boolean error = rs.isClosed();
         	   outputToClient.writeBoolean(error);
-        	   jta.append("Sorry you are not a registered student. Bye");
-               socket.close(); // close socket
+        	   jta.append("Not found in Database");
+        	   // close socket
+               socket.close(); 
            }
 	      }
 	    }
