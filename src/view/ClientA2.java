@@ -72,34 +72,29 @@ public class ClientA2 extends JFrame {
 	      try {
 	        // Get the radius from the text field
 	        int studentNu = Integer.parseInt(jtf.getText());
-	        	// first number =20018384 
+	        // first number =20018384 
 	        // other number in db = 20081344
 	        //third  = 20018484
 	        // Send the radius to the server
 	        toServer.writeInt(studentNu);
 	        //server does get
 	       
-	        toServer.flush();
-	        
+	        toServer.flush(); 
 	        // Get area from the server
 	        int studentID = fromServer.readInt();
 	        int studentNuRet = fromServer.readInt();
 	        String firstName = fromServer.readUTF();
 	        String secondName = fromServer.readUTF();
-	        Boolean error = fromServer.readBoolean();
-    
 	    
 	        // Display to the text area
 	        jta.append("Student Number entered is " + studentNu + "\n");
 	        jta.append("Welcome "+ studentID +".. You are now connected to the Server"+ '\n');
 	        jta.append(+ studentID + " " + studentNuRet + " " + firstName + " " + secondName + "\n"); 
-	        
-	        if(error) {
-	        	jta.append("Sorry you are not a registered student. Bye");
-	        }
 	      
 	      }
 	      catch (IOException ex) {
+	    	  jta.append("Sorry you are not a registered student, bye " + "\n");
+	    	  jtf.setText("Next time please insert a valid number");
 	        System.err.println(ex);
 	      }
 	    }

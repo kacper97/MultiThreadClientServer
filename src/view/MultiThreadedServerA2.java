@@ -72,13 +72,13 @@ public class MultiThreadedServerA2 extends JFrame {
 	  	        jta.append("Student Number received from client: " + studentNu + '\n');    
 		        jta.append("Info found: " + studentID + " " + studentNu + " " + firstName + " " + secondName + '\n');
 	      }
-           
-        	   Boolean error = rs.wasNull();
+           else {
+        	   Boolean error = rs.isClosed();
         	   outputToClient.writeBoolean(error);
         	   jta.append("Sorry you are not a registered student. Bye");
                
                socket.close(); // close socket
-           
+           }
 	      }
 	    }
 	    catch(IOException ex) {
