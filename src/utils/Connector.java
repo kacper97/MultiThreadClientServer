@@ -6,9 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Properties;
 
-public class Connector  {
-   
-    
+public class Connector  {   
 	/** The name of the MySQL account to use (or empty for anonymous) */
 	private final String userName = "root";
 
@@ -45,10 +43,8 @@ public class Connector  {
 		return conn;
 	}
  
-	/**
-	 * Connect to MySQL and execute update added together and refactored
-	 * 
-	 * USED CONCUR UPDATABLE BECAUSE I WAS GETTIN
+	/*
+	 * USED CONCUR UPDATABLE BECAUSE I WAS GETTING
 	 * Result Set not updatable (referenced table has no primary keys).This result set must come from a statement that was created with a result set type of ResultSet.CONCUR_UPDATABLE.
 	 * The query must select only one table, can not use functions and must select all primary keys from that table. 
 	 * See the JDBC 2.1 API Specification, section 5.6 for more detail
@@ -56,21 +52,11 @@ public class Connector  {
 	 * REFERENCE https://coderanch.com/t/658850/databases/exception-updatable-ResultSet
 	 */
 	
-	public ResultSet run() throws SQLException {
-		// Connect to MySQL
-		Statement stmt = getConnection().createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-        stmt.executeQuery("SELECT * FROM mystudents");
-        System.out.println("Created a result set");
-        ResultSet rs = stmt.getResultSet();
-        return rs;
-        }
-
     /*
-    Returns ResultSet of found record from database
+    Returns ResultSet  found record from database for a specific id that was entered
      */
     public ResultSet returnRecord(int id) throws SQLException{
-        Statement stmt = getConnection().createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
-                ResultSet.CONCUR_UPDATABLE);
+        Statement stmt = getConnection().createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
        String sqlGet = "SELECT * FROM myStudents WHERE STUD_ID ='" + id + "'";
         stmt.executeQuery(sqlGet);
         ResultSet rs = stmt.getResultSet();

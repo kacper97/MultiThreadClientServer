@@ -9,16 +9,15 @@ import java.awt.*;
  * GITHUB to the project, showing all commits and working around the assignment
  * Over a time of a week.
  * https://github.com/kacper97/MultiThreadClientServer
- * 
- * Created by Kacper Woloszyn.
- * 
+ * Created by Kacper Woloszyn. 
  */
+
 public class Driver extends JFrame {
 	// Button for client creation
     private JButton btn_client = new JButton("Click for a new Client");
 
     private Driver() {
-    	// Creates a frame
+    // Creates a frame
     setLayout(new BorderLayout());
     add(btn_client, BorderLayout.CENTER);
 
@@ -27,7 +26,7 @@ public class Driver extends JFrame {
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setVisible(true);
 
-    // Add action listener for launching client
+    // when button pressed launch client
     btn_client.addActionListener(e -> new ClientA2());
 }
 
@@ -35,6 +34,4 @@ public class Driver extends JFrame {
 			 new Driver();
 			 new MultiThreadedServerA2();
 	        }
-
-	}
-
+}

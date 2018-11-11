@@ -5,12 +5,8 @@ import java.net.*;
 import java.sql.SQLException;
 import java.util.*;
 import java.awt.*;
-
 import utils.Connector;
-
 import javax.swing.*;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class MultiThreadedServerA2 extends JFrame {
 	  // connections to the database
@@ -25,19 +21,21 @@ public class MultiThreadedServerA2 extends JFrame {
 	    JScrollPane scrollPane = new JScrollPane(jta);
 	    getContentPane().add(scrollPane, BorderLayout.CENTER);
 	    
-	    JLabel lblInformationAboutServer = new JLabel("Information about server");
+	    JLabel lblInformationAboutServer = new JLabel("Information about Server");
 	    scrollPane.setColumnHeaderView(lblInformationAboutServer);
 	    
+	    //Quit button init/ action listener / Location on Frame
 	    JButton btnQuit = new JButton("QUIT");
-	    //Quit button that closes the app
-	    btnQuit.addActionListener(e -> System.exit(0));
+	    btnQuit.addActionListener(e -> System.exit(0));  //Quit button that closes the app
 	    getContentPane().add(btnQuit, BorderLayout.SOUTH);
 
+	    //Window
 	    setTitle("Server");
 	    setSize(500, 300);
 	    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    setVisible(true); // It is necessary to show the frame here!
 
+	    //Gets the database
 	    getConnection();
 	    
 	    try {
@@ -45,14 +43,12 @@ public class MultiThreadedServerA2 extends JFrame {
 	      ServerSocket serverSocket = new ServerSocket(8000);
 	      //information about the server
 	      jta.append("Server started at " + new Date() + '\n');
-
-	      
-	      // if the socket is still connected do this loop, checking if not closed 
-	      //  As prior, if wrong number entered it would close the socket but still print out processing
+	      // if the socket is connected start print out Processing string
+	      // if connection accepted, start a new thread
 	      while (true) {
 	    	  Socket socket = serverSocket.accept();
 	    	  if (socket.isConnected()) {
-	    		  jta.append("Processing ...." + '\n');
+	    		  jta.append("Processing new request to server ...." + '\n');
 	    	  }
 	    	  Thread thread = new SThread(socket);
 	    	  thread.start();
@@ -60,22 +56,17 @@ public class MultiThreadedServerA2 extends JFrame {
 	    }
 	      catch(IOException ex) {
 	    	     System.err.println(ex);
-	    	  
 	      	}
 	    }
 	    
+	  	//Gets the connection on the server side
 	    private void getConnection(){
 	    	try {
 				jdbc.getConnection();
-				System.out.println("Connected to Database");
+				jta.append("Connected to Database" + "\n");
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 	    	
 	    }
-	  }
-
-
-
-
+}

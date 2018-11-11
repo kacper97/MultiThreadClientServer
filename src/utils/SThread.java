@@ -8,10 +8,13 @@ import java.io.IOException;
 
 //SThread = Server Thread
 public class SThread extends Thread {
+	
+	//init of socket and connector
 	public Socket socket;
 
     private Connector jdbc = new Connector();
 
+    //Constructor
     public SThread(Socket socket) {
     	this.socket=socket;
     }
@@ -26,11 +29,14 @@ public class SThread extends Thread {
             DataOutputStream outputToClient = new DataOutputStream(
                 socket.getOutputStream());
         
+            //When there is a connection
             while (true) {
     	        // Receive Student number from the client
     	        int studentNu = inputFromClient.readInt();
+    	        // Result set from data base obtains the results of all rows in table of Student Number
     	        ResultSet rs = jdbc.returnRecord(studentNu);
-    	       	
+    	       
+    	        //if found result set 
                if (rs.next()) {
     			   	int studentID=  rs.getInt("SID");	
     				outputToClient.writeInt(studentID);
